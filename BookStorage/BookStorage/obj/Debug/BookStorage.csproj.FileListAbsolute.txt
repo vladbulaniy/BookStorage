@@ -1,0 +1,10 @@
+C:\Users\Vlad-PC\source\repos\BookStorage\BookStorage\bin\Debug\BookStorage.exe.config
+C:\Users\Vlad-PC\source\repos\BookStorage\BookStorage\bin\Debug\BookStorage.exe
+C:\Users\Vlad-PC\source\repos\BookStorage\BookStorage\bin\Debug\BookStorage.pdb
+C:\Users\Vlad-PC\source\repos\BookStorage\BookStorage\obj\Debug\BookStorage.csprojAssemblyReference.cache
+C:\Users\Vlad-PC\source\repos\BookStorage\BookStorage\obj\Debug\BookStorage.csproj.CoreCompileInputs.cache
+C:\Users\Vlad-PC\source\repos\BookStorage\BookStorage\obj\Debug\BookStorage.exe
+C:\Users\Vlad-PC\source\repos\BookStorage\BookStorage\obj\Debug\BookStorage.pdb
+C:\Users\Vlad-PC\source\repos\BookStorage\BookStorage\bin\Debug\Newtonsoft.Json.dll
+C:\Users\Vlad-PC\source\repos\BookStorage\BookStorage\bin\Debug\Newtonsoft.Json.xml
+C:\Users\Vlad-PC\source\repos\BookStorage\BookStorage\obj\Debug\BookStorage.csproj.CopyComplete
