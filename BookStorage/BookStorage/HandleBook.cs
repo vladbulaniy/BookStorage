@@ -27,17 +27,20 @@ namespace BookStorage
             }
         };
 
-        public static string AddBook(Book book)
+        public delegate void BookHandler(string message);
+        public static event BookHandler Notify;
+
+        public static void AddBook(Book book)
         {
             if (book.Id == 0)
             {
                 book.Id = Books.Last().Id +1;
             }
             Books.Add(book);
-            return book.Title;
+            Notify?.Invoke($"The name of added book is {book.Title}");
         }
 
-        public static string DeleteBook(int bookId)
+        public static void DeleteBook(int bookId)
         {
             string result = "Book doesnt find";
             var book = Books.SingleOrDefault(x => x.Id == bookId);
@@ -46,7 +49,8 @@ namespace BookStorage
                 result = book.Title;
                 Books.Remove(book);                
             }
-            return result;
+            result = $"The name of deleted book is {book.Title}";
+            Notify?.Invoke(result);
         }
 
         public static string GetAllBooks()

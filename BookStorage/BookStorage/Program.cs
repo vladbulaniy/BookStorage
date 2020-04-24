@@ -8,8 +8,8 @@ namespace BookStorage
 {
     class Program
     {
-        public delegate string Add(Book Book);
-        public delegate string Delete(int id);
+        public delegate void Add(Book Book);
+        public delegate void Delete(int id);
 
 
         static void Main(string[] args)
@@ -21,14 +21,22 @@ namespace BookStorage
                 Title = "Winnie-the-Pooh",
                 Author = "Alan Alexander Milne"
             };
-            Console.WriteLine("Lets add new book. This is {0}", AddBook(newBook));
+
+            HandleBook.Notify += DisplayMessage;
+
+            AddBook(newBook);
             Console.WriteLine();
             Console.WriteLine("All books - {0}", HandleBook.GetAllBooks());
             Console.WriteLine();
-            Console.WriteLine("Lets remove Jane Eyre book. The removed book title is {0}", DeleteBook(2));
+            DeleteBook(2);
             Console.WriteLine();
             Console.WriteLine("All books - {0}", HandleBook.GetAllBooks());
-            Console.ReadLine();
+            Console.ReadLine();           
+        }
+
+        private static void DisplayMessage(string message)
+        {
+            Console.WriteLine(message);
         }
     }
 }
