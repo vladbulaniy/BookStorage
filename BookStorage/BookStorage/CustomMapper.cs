@@ -10,8 +10,8 @@ namespace BookStorage
         public static D Map<S, D>(S source, D destination)
         {
             D result;
-            var sourceFields = GetListFields(S);
-            var destinationFields = GetListFields(D);
+            var sourceFields = GetListFields(typeof (S));
+            var destinationFields = GetListFields(typeof(D));
 
             foreach (var sField in sourceFields.Select((value, i) => new { i, value }))
             {
