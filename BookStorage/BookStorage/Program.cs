@@ -14,13 +14,23 @@ namespace BookStorage
 
         static void Main(string[] args)
         {
-            Add AddBook = HandleBook.AddBook;
-            Delete DeleteBook = HandleBook.DeleteBook;
             Book newBook = new Book
             {
+                Id = 10,
                 Title = "Winnie-the-Pooh",
                 Author = "Alan Alexander Milne"
             };
+            Book2 book2 = new Book2();
+
+            CustomMapper.Map(newBook, book2);
+            Console.WriteLine("Book2 Title - {0}", book2.Title);
+            Console.ReadLine();
+
+
+
+            Add AddBook = HandleBook.AddBook;
+            Delete DeleteBook = HandleBook.DeleteBook;
+            
 
             HandleBook.Notify += DisplayMessage;
 

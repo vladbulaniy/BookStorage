@@ -9,27 +9,29 @@ namespace BookStorage
     {
         public static D Map<S, D>(S source, D destination)
         {
-            D result;
-            var sourceFields = GetListFields(typeof (S));
-            var destinationFields = GetListFields(typeof(D));
+            var sType = typeof(S);
+            var dType = typeof(D);
+            var sourceProperties = GetPropertysList(typeof(S));
+            var destinationProperties = GetPropertysList(typeof(D));
 
-            foreach (var sField in sourceFields.Select((value, i) => new { i, value }))
+            foreach (var item in sourceProperties)
             {
-                var sFieldName = sField.value;
-                var index = sField.i;
-
-                if (sFieldName == destinationFields[index])
-                {
-                    result[sFieldName] = destinationFields[index];
-                }
+                PropertyInfo dPropertyInfo = dType.GetProperty(item);
+                PropertyInfo sPropertyInfo = sType.GetProperty(item);
+                dPropertyInfo.SetValue(destination, GetPropValue(source,item));
             }
 
-            return result;
+            return destination;
         }
 
-        public static List<string> GetListFields(Type t)
+        public static object GetPropValue(object src, string propName)
         {
-            var result = from f in t.GetFields() select f.Name;
+            return src.GetType().GetProperty(propName).GetValue(src, null);
+        }
+
+        public static List<string> GetPropertysList(Type t)
+        {
+            var result = from f in t.GetProperties() select f.Name;
             return result.ToList();
         }
     }
