@@ -49,5 +49,11 @@ namespace BookStorage
             var result = from f in t.GetProperties() select f.Name;
             return result.ToList();
         }
+
+        public static D ForMember<D>(D destination, Func<int, int> retF)
+        { 
+
+            return destination;
+        }
     }
 }
