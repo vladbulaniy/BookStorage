@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -23,9 +24,9 @@ namespace BookStorage
             Book2 book2 = new Book2();
 
             CustomMapper.Map(newBook, book2);
-            Console.WriteLine("Book2 Title - {0}", book2.Title);
+            Console.WriteLine("Book1 - {0}", JsonConvert.SerializeObject(newBook));
+            Console.WriteLine("Book2 - {0}", JsonConvert.SerializeObject(book2));
             Console.ReadLine();
-
 
 
             Add AddBook = HandleBook.AddBook;

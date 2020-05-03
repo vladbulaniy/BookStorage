@@ -46,6 +46,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Attributes\Ignore.cs" />
     <Compile Include="Book.cs" />
     <Compile Include="Book2.cs" />
     <Compile Include="CustomMapper.cs" />
