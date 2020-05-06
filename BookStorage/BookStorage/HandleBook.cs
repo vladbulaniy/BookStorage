@@ -1,4 +1,5 @@
 ﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -55,8 +56,12 @@ namespace BookStorage
 
         public static string GetAllBooks()
         {
-            return JsonConvert.SerializeObject(Books);
-            
+            return JsonConvert.SerializeObject(Books);            
+        }
+
+        public static string DoFullName(Book book)
+        {
+            return String.Format("{0} - {1}", book.Title, book.Author);
         }
     }
 }

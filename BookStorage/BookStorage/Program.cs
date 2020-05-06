@@ -1,9 +1,5 @@
 ﻿using Newtonsoft.Json;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace BookStorage
 {
@@ -11,10 +7,13 @@ namespace BookStorage
     {
         public delegate void Add(Book Book);
         public delegate void Delete(int id);
+        public delegate string FullName(Book book);
 
 
         static void Main(string[] args)
         {
+            FullName fullName = HandleBook.DoFullName;
+
             Book newBook = new Book
             {
                 Id = 10,
@@ -23,7 +22,9 @@ namespace BookStorage
             };
             Book2 book2 = new Book2();
 
-            CustomMapper.Map(newBook, book2);
+            CustomMapper.Map(newBook, book2).ForMember(b => b.FullName = b.Title + b.Author);
+
+
             Console.WriteLine("Book1 - {0}", JsonConvert.SerializeObject(newBook));
             Console.WriteLine("Book2 - {0}", JsonConvert.SerializeObject(book2));
             Console.ReadLine();
@@ -49,5 +50,9 @@ namespace BookStorage
         {
             Console.WriteLine(message);
         }
+
+        
+
+        
     }
 }

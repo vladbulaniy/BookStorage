@@ -50,9 +50,9 @@ namespace BookStorage
             return result.ToList();
         }
 
-        public static D ForMember<D>(D destination, Func<int, int> retF)
-        { 
-
+        public static D ForMember<D>(this D destination, Func<D, string> action)
+        {
+            action(destination);
             return destination;
         }
     }
