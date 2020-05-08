@@ -49,6 +49,8 @@
     <Compile Include="Attributes\Ignore.cs" />
     <Compile Include="Book.cs" />
     <Compile Include="Book2.cs" />
+    <Compile Include="CarNew.cs" />
+    <Compile Include="CarOld.cs" />
     <Compile Include="CustomMapper.cs" />
     <Compile Include="HandleBook.cs" />
     <Compile Include="Program.cs" />

@@ -21,13 +21,44 @@ namespace BookStorage
                 Author = "Alan Alexander Milne"
             };
             Book2 book2 = new Book2();
+            book2.Id = -1;           
 
-            CustomMapper.Map(newBook, book2).ForMember(b => b.FullName = b.Title + b.Author);
+            CustomMapper<Book, Book2>.ForMember(b => b.FullName, b => b.Title + b.Author);
 
+            CustomMapper<Book, Book2>.Map(newBook, book2);
 
             Console.WriteLine("Book1 - {0}", JsonConvert.SerializeObject(newBook));
             Console.WriteLine("Book2 - {0}", JsonConvert.SerializeObject(book2));
             Console.ReadLine();
+
+
+
+
+            /*
+            CarNew carNew = new CarNew();
+            CarOld carOld = new CarOld
+            {
+                Id = 5,
+                Brand = "BMW",
+                Model = "X5",
+                Color = "red",
+                Mileage = 134
+            };
+
+            CustomMapper<CarOld, CarNew>.ForMember(carNew, c => c.FullInfo = c.Color + " " + c.Brand + " " + c.Model);
+
+            CustomMapper<CarOld, CarNew>.Map(carOld, carNew);
+
+            Console.WriteLine("Book1 - {0}", JsonConvert.SerializeObject(carOld));
+            Console.WriteLine("Book2 - {0}", JsonConvert.SerializeObject(carNew));
+            Console.ReadLine();
+            */
+
+
+
+
+
+
 
 
             Add AddBook = HandleBook.AddBook;

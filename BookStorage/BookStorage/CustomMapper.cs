@@ -2,13 +2,17 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Reflection;
 
 namespace BookStorage
 {
-    public static class CustomMapper
+    public static class CustomMapper<S,D>
     {
-        public static D Map<S, D>(S source, D destination)
+
+        public static List<KeyValuePair<string, Func<S, string>>> configure = new List<KeyValuePair<string, Func<S, string>>>();
+        
+    public static D Map(S source, D destination)
         {
             var sType = typeof(S);
             var dType = typeof(D);
@@ -19,23 +23,29 @@ namespace BookStorage
             {
                 PropertyInfo dPropertyInfo = dType.GetProperty(item);
                 PropertyInfo sPropertyInfo = sType.GetProperty(item);
-                
+
                 if (Validation(sPropertyInfo, dPropertyInfo))
                 {
                     dPropertyInfo.SetValue(destination, GetPropValue(source, item));
-                }                
+                }                                
+            }
+
+            foreach (var item in configure)
+            {
+             //   item.Value(destination);                
             }
             return destination;
         }
 
-        public static bool Validation (PropertyInfo sPropertyInfo, PropertyInfo dPropertyInfo)
+
+        public static bool Validation(PropertyInfo sPropertyInfo, PropertyInfo dPropertyInfo)
         {
             bool result = false;
             Ignore attr = (Ignore)Attribute.GetCustomAttribute(sPropertyInfo, typeof(Ignore), false);
             var isIgnore = attr?.isIgnore ?? false;
 
             result = sPropertyInfo.Name == dPropertyInfo.Name && sPropertyInfo.PropertyType == dPropertyInfo.PropertyType && !isIgnore;
-            
+
             return result;
         }
 
@@ -50,10 +60,12 @@ namespace BookStorage
             return result.ToList();
         }
 
-        public static D ForMember<D>(this D destination, Func<D, string> action)
+        public static void ForMember(Func<D,string> prop, Func<S, string> action)
         {
-            action(destination);
-            return destination;
+            //  var exp = Expression.Convert(action, typeof(Func<object, string>));
+
+          
+            configure.Add(new KeyValuePair<string, Func<S, string>>(typeof(D).Name, action));
         }
     }
 }
